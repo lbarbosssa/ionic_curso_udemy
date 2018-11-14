@@ -1,0 +1,4 @@
+*Para adicionar o SQLite, basta seguir a documentação.
+    Adicionar o pacote npm;
+    Adicionar o Plugin;
+    Adiconar o Plugin no app.module.ts

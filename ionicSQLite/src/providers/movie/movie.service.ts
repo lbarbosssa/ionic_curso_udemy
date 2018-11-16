@@ -69,5 +69,16 @@ export class MovieService {
       .catch((error: Error) => { return Promise.reject(error); });
   }
 
+  delete(id: number): Promise<boolean>{
+    return this.db.executeSql('DELETE FROM movie WHERE id=?', [id])
+    .then(resultSet => resultSet.rowsAffected > 0)
+    .catch((error: Error) => { return Promise.reject(error); });
+  }
+
+  getById(id: number): Promise<Movie> {
+    return this.db.executeSql('SELECT * FROM movie WHERE id=?', [id])
+      .then(resultSet => resultSet.rows.item(0))
+      .catch((error: Error) => console.log(`Error fetching movie with id ${id}`, error));
+  }
 
 }

@@ -22,6 +22,17 @@ export class HomePage {
     public navCtrl: NavController
     ) {}
 
+    onSave(type: string, item?: ItemSliding, movie?: Movie ): void{
+      let title: string = type.charAt(0).toUpperCase() + type.substr(1);
+      this.showAlert({
+        itemSliding: item,
+        title: `${title} movie`,
+        type: type,
+        movie: movie
+      });
+
+    }
+
     private showAlert(options: {itemSliding?: ItemSliding, title: string, type: string, movie?: Movie}): void{
       let alertOptions: AlertOptions = {
         title: options.title,
@@ -60,7 +71,11 @@ export class HomePage {
             }
           }
         ]
+      };
+      if (options.type === 'update'){
+        alertOptions.inputs[0]['value'] = options.movie.title;
       }
+      this.alertCtrl.create(alertOptions).present();
     }
 
     private showLoading(message?: string): Loading{

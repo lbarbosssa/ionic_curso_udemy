@@ -9,11 +9,7 @@ import { MovieService } from '../../providers/movie/movie.service';
 })
 export class HomePage {
 
-  movies: Movie[] = [
-    new Movie('Velozes e Furiosos'),
-    new Movie('Busca Implacavel')
-
-  ];
+  movies: Movie[] = [];
 
   constructor(
     public alertCtrl: AlertController,
@@ -21,6 +17,13 @@ export class HomePage {
     public movieService: MovieService,
     public navCtrl: NavController
   ) { }
+
+  ionViewDidLoad(){
+    this.movieService.getAll()
+    .then((movies: Movie[]) => {
+      this.movies = movies;
+    })
+  }
 
   onSave(type: string, item?: ItemSliding, movie?: Movie): void {
     let title: string = type.charAt(0).toUpperCase() + type.substr(1);
